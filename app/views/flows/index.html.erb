@@ -1,20 +1,45 @@
-<h1 class="text-xl font-bold mb-4">柔術ミニマップ 🥋</h1>
+<div data-controller="flows" class="relative w-full">
+  <div data-flows-target="cy" class="h-screen w-full border border-gray-300"></div>
 
-<div data-controller="flows" style="width: 100%; height: 300px; border: 1px solid #ccc;">
+  <div
+    data-flows-target="drawer"
+    class="fixed top-0 right-0 h-full w-1/3 bg-white shadow-lg transform translate-x-full transition-transform duration-300"
+  >
+    <div class="p-4">
+      <h1 class="font-bold text-3xl mb-3 text-gray-500" data-flows-target="drawerTitle"></h1>
+      <%# <p data-flows-target="drawerContent"></p> %>
+      <div class="mb-4">
+        <h2 class="text-lg text-gray-500">Condition</h2>
+        <p data-flows-target="condition">相手が足を引いてきた時</p>
+      </div>
+      <div class="mb-4">
+        <h2 class="text-lg text-gray-500">Detail</h2>
+        <p data-flows-target="detail">相手の膝ではなく、膝上を蹴る（怪我防止）</p>
+      </div>
+      <div class="mb-4">
+        <h2 class="text-lg text-gray-500">Action Type</h2>
+        <label for="action-type-select">
+          <select name="action-type" id="action-type-select" class="border border-gray-300 rounded-lg text-gray-700">
+            <option value="1"> Offense </option>
+            <option value="2"> Defense </option>
+          </select>
+        </label>
+      </div>
+      <div class="mb-4">
+        <h2 class="text-lg text-gray-500">Mastery Level</h2>
+        <label for="action-type-select">
+          <select name="action-type" id="action-type-select" class="border border-gray-300 rounded-lg text-gray-700">
+            <option value="1"> 0%: Not Learned </option>
+            <option value="2"> 20%: Familiar </option>
+            <option value="3"> 60%: Practicing </option>
+            <option value="4"> 80%: Almost There </option>
+            <option value="5"> 100%: Mastered </option>
+          </select>
+        </label>
+      </div>
+      <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow my-4">
+      Save
+      </button>
+    </div>
+  </div>
 </div>
-
-
-<%# <div data-controller="flows">
-  <svg id="flow-canvas" width="800" height="600" class="border border-gray-300"></svg>
-</div> %>
-
-<%# <div data-controller="hello">
-  <input data-hello-target="name" type="text" placeholder="sample">
-
-  <button data-action="click->hello#greet">
-    Greet
-  </button>
-
-  <span data-hello-target="output">
-  </span>
-</div> %>

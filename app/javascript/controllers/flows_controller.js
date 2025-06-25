@@ -1,4 +1,3 @@
-// app/javascript/controllers/flow_controller.js
 import { Controller } from "@hotwired/stimulus";
 import cytoscape from "cytoscape";
 import dagre from "cytoscape-dagre";
@@ -6,9 +5,11 @@ import dagre from "cytoscape-dagre";
 cytoscape.use(dagre);
 
 export default class extends Controller {
+  static targets = ["cy", "drawer", "drawerTitle", "drawerContent"];
+
   connect() {
-    this.cy = cytoscape({
-      container: this.element,
+    this.cyInstance = cytoscape({
+      container: this.cyTarget,
       elements: [
         { data: { id: "closed", label: "クローズドガード" } },
         { data: { id: "kusakari", label: "草刈り" } },
@@ -30,14 +31,14 @@ export default class extends Controller {
         {
           selector: "node",
           style: {
-            shape: "roundrectangle",
+            shape: "round-rectangle",
             width: "label", // ← 非推奨？要確認
             height: 10,
             "background-color": "#FFFFFF",
             label: "data(label)",
             "text-valign": "center",
             "text-halign": "center",
-            // "color": "#1E3A8A",
+            "color": "#505050",
             "font-size": "8px",
             padding: "4px",
           },
@@ -46,8 +47,8 @@ export default class extends Controller {
           selector: "edge",
           style: {
             "curve-style": "round-taxi",
-            "width": 1,
-            "line-color": "#4984dd",
+            width: 1,
+            "line-color": "#d2d7da",
             "target-arrow-shape": "none",
             "taxi-radius": 50,
             "taxi-turn": "10px", // 曲がり角の位置として、ソースノードからの絶対距離を指定する（指定しないとソースノードとターゲットノードの相対距離によって位置算出が行われるらしく、同列ノードの曲がり角の位置がズレる）
@@ -62,5 +63,17 @@ export default class extends Controller {
         ranker: "tight-tree",
       },
     });
+    
+    this.cyInstance.on("tap", "node", (evt) => {
+      const node = evt.target;
+      this.showDrawer(node.data());
+    });
+  }
+
+  showDrawer(data) {
+    this.drawerTitleTarget.textContent = data.label;
+    // this.drawerContentTarget.textContent = `ノードID: ${data.id}`;
+    this.drawerTarget.classList.remove("translate-x-full");
+    this.drawerTarget.classList.add("translate-x-0");
   }
 }
