@@ -34,7 +34,7 @@ export default class extends Controller {
             shape: "round-rectangle",
             width: "label", // ← 非推奨？要確認
             height: 10,
-            "background-color": "#FFFFFF",
+            "background-color": "#F6F9FB",
             label: "data(label)",
             "text-valign": "center",
             "text-halign": "center",
