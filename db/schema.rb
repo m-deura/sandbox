@@ -24,12 +24,12 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_30_051232) do
   end
 
   create_table "edges", force: :cascade do |t|
-    t.bigint "source_node_id_id", null: false
-    t.bigint "target_node_id_id", null: false
+    t.bigint "source_node_id", null: false
+    t.bigint "target_node_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["source_node_id_id"], name: "index_edges_on_source_node_id_id"
-    t.index ["target_node_id_id"], name: "index_edges_on_target_node_id_id"
+    t.index ["source_node_id"], name: "index_edges_on_source_node_id"
+    t.index ["target_node_id"], name: "index_edges_on_target_node_id"
   end
 
   create_table "nodes", force: :cascade do |t|
@@ -39,7 +39,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_30_051232) do
     t.index ["action_id"], name: "index_nodes_on_action_id"
   end
 
-  add_foreign_key "edges", "nodes", column: "source_node_id_id"
-  add_foreign_key "edges", "nodes", column: "target_node_id_id"
+  add_foreign_key "edges", "nodes", column: "source_node_id"
+  add_foreign_key "edges", "nodes", column: "target_node_id"
   add_foreign_key "nodes", "actions"
 end

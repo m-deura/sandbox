@@ -1,9 +1,9 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  source_node_id: one
-  target_node_id: one
+  source_node: one
+  target_node: one
 
 two:
-  source_node_id: two
-  target_node_id: two
+  source_node: two
+  target_node: two
