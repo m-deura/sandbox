@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_30_014052) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_30_051232) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,4 +22,24 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_30_014052) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "edges", force: :cascade do |t|
+    t.bigint "source_node_id_id", null: false
+    t.bigint "target_node_id_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_node_id_id"], name: "index_edges_on_source_node_id_id"
+    t.index ["target_node_id_id"], name: "index_edges_on_target_node_id_id"
+  end
+
+  create_table "nodes", force: :cascade do |t|
+    t.bigint "action_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["action_id"], name: "index_nodes_on_action_id"
+  end
+
+  add_foreign_key "edges", "nodes", column: "source_node_id_id"
+  add_foreign_key "edges", "nodes", column: "target_node_id_id"
+  add_foreign_key "nodes", "actions"
 end
