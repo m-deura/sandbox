@@ -8,63 +8,68 @@ export default class extends Controller {
   static targets = ["cy", "drawer", "drawerTitle", "drawerContent"];
 
   connect() {
-    this.cyInstance = cytoscape({
+    this.cy = cytoscape({
       container: this.cyTarget,
+      autoungrabify: true,
       elements: [
-        { data: { id: "closed", label: "クローズドガード" } },
-        { data: { id: "kusakari", label: "草刈り" } },
-        { data: { id: "pass", label: "パスガード" } },
-        { data: { id: "sample1", label: "サンプル1" } },
-        { data: { id: "sample2", label: "サンプル2" } },
-        { data: { id: "sample3", label: "サンプル3" } },
-        { data: { id: "sample4", label: "サンプル4" } },
-        { data: { id: "sample5", label: "サンプル5" } },
-        { data: { source: "closed", target: "kusakari" } },
-        { data: { source: "kusakari", target: "pass" } },
-        { data: { source: "kusakari", target: "sample1" } },
-        { data: { source: "kusakari", target: "sample2" } },
-        { data: { source: "closed", target: "sample3" } },
-        { data: { source: "sample3", target: "sample4" } },
-        { data: { source: "sample3", target: "sample5" } },
+        { data: { id: "1", label: "クローズドガード" } },
+        { data: { id: "2", label: "草刈り" } },
+        { data: { id: "3", label: "パスガード" } },
+        { data: { id: "4", label: "サンプル1" } },
+        { data: { id: "5", label: "サンプル2" } },
+        { data: { id: "6", label: "サンプル3" } },
+        { data: { id: "7", label: "サンプル4" } },
+        { data: { id: "8", label: "サンプル5" } },
+        { data: { source: "1", target: "2" } },
+        { data: { source: "2", target: "3" } },
+        { data: { source: "2", target: "4" } },
+        { data: { source: "2", target: "5" } },
+        { data: { source: "1", target: "6" } },
+        { data: { source: "6", target: "7" } },
+        { data: { source: "6", target: "8" } },
       ],
       style: [
         {
           selector: "node",
           style: {
             shape: "round-rectangle",
-            width: "label", // ← 非推奨？要確認
-            height: 10,
-            "background-color": "#F6F9FB",
+            width: 100,
+            height: 15,
+            "background-color": "#FFFFFF",
             label: "data(label)",
             "text-valign": "center",
             "text-halign": "center",
             "color": "#505050",
             "font-size": "8px",
-            padding: "4px",
+            "padding": "4px",
+            'border-width': 0.5,
+            'border-color': '#000',
+            'border-style': 'solid',
+            'border-cap': "square"
           },
         },
         {
           selector: "edge",
           style: {
             "curve-style": "round-taxi",
-            width: 1,
-            "line-color": "#d2d7da",
+            width: 0.5,
+            "line-color": "#b1b1b6",
             "target-arrow-shape": "none",
-            "taxi-radius": 50,
-            "taxi-turn": "10px", // 曲がり角の位置として、ソースノードからの絶対距離を指定する（指定しないとソースノードとターゲットノードの相対距離によって位置算出が行われるらしく、同列ノードの曲がり角の位置がズレる）
+            "taxi-radius": 3,
+            "taxi-turn": "20px", // 曲がり角の位置として、ソースノードからの絶対距離を指定する（指定しないとソースノードとターゲットノードの相対距離によって位置算出が行われるらしく、同列ノードの曲がり角の位置がズレる）
           },
         },
       ],
       layout: {
         name: "dagre",
         rankDir: "LR",
-        nodeSep: 0,
+        nodeSep: 5,
         edgeSep: 10,
         ranker: "tight-tree",
       },
     });
     
-    this.cyInstance.on("tap", "node", (evt) => {
+    this.cy.on("tap", "node", (evt) => {
       const node = evt.target;
       this.showDrawer(node.data());
     });
