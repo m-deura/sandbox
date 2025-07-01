@@ -16,7 +16,7 @@ Rails.application.routes.draw do
 
   namespace :mypage do
     get "/", to: "dashboard#show"
-    get "graph_data", to: "graphs#show"
+    get "charts", to: "charts#show"
     get "actions", to: "actions#index"
   end
 end

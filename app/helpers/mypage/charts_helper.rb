@@ -1,0 +1,2 @@
+module Mypage::ChartsHelper
+end
