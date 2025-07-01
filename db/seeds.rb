@@ -16,7 +16,7 @@ bottom = Action.create!(
   action_type: :offense,
   mastery_level: :Perfect
   )
-  
+
 top = Action.create!(
   title: "TOP",
   action_type: :offense,
@@ -52,13 +52,13 @@ end
 #   mastery_level: :Familiar
 # )
 
-node_arr = action_arr.map{ |action| Node.create!(action: action) }
+node_arr = action_arr.map { |action| Node.create!(action: action) }
 
 edges = [
-  [0,2],
-  [0,3],
-  [2,4],
-  [2,5]
+  [ 0, 2 ],
+  [ 0, 3 ],
+  [ 2, 4 ],
+  [ 2, 5 ]
 ]
 
 edges.each do |src, tgt|
