@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   root "pages#home"
 
   namespace :mypage do
-    get "/", to: "users#show"
+    get "/", to: "dashboard#show"
     get "graph_data", to: "graphs#show"
     get "actions", to: "actions#index"
   end
