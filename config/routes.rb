@@ -16,7 +16,12 @@ Rails.application.routes.draw do
 
   namespace :mypage do
     get "/", to: "dashboard#show"
-    get "charts", to: "charts#show"
     get "actions", to: "actions#index"
+  end
+
+  namespace :api do
+    namespace :v1 do
+      resources :charts, only: %i[index show]
+    end
   end
 end
