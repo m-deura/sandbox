@@ -25,20 +25,31 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_30_051232) do
     t.index ["user_id"], name: "index_actions_on_user_id"
   end
 
+  create_table "charts", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_charts_on_user_id"
+  end
+
   create_table "edges", force: :cascade do |t|
     t.bigint "source_node_id", null: false
     t.bigint "target_node_id", null: false
+    t.bigint "chart_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["chart_id"], name: "index_edges_on_chart_id"
     t.index ["source_node_id"], name: "index_edges_on_source_node_id"
     t.index ["target_node_id"], name: "index_edges_on_target_node_id"
   end
 
   create_table "nodes", force: :cascade do |t|
     t.bigint "action_id", null: false
+    t.bigint "chart_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["action_id"], name: "index_nodes_on_action_id"
+    t.index ["chart_id"], name: "index_nodes_on_chart_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -55,7 +66,10 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_30_051232) do
   end
 
   add_foreign_key "actions", "users"
+  add_foreign_key "charts", "users"
+  add_foreign_key "edges", "charts"
   add_foreign_key "edges", "nodes", column: "source_node_id"
   add_foreign_key "edges", "nodes", column: "target_node_id"
   add_foreign_key "nodes", "actions"
+  add_foreign_key "nodes", "charts"
 end
