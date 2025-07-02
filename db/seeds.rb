@@ -9,6 +9,7 @@
 #   end
 
 admin_user = User.find_by(id: 1) || User.create!(email: "admin@example.com", password: "password")
+chart = Chart.find_by(id: 1) || Chart.create!(user: admin_user)
 
 action_arr = []
 
@@ -55,7 +56,7 @@ end
 #   mastery_level: :Familiar
 # )
 
-node_arr = action_arr.map { |action| Node.create!(action: action) }
+node_arr = action_arr.map { |action| Node.create!(chart: chart, action: action) }
 
 edges = [
   [ 0, 2 ],
@@ -65,5 +66,5 @@ edges = [
 ]
 
 edges.each do |src, tgt|
-  Edge.create!(source_node: node_arr[src], target_node: node_arr[tgt])
+  Edge.create!(chart: chart, source_node: node_arr[src], target_node: node_arr[tgt])
 end
