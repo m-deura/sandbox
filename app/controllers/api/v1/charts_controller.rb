@@ -1,6 +1,7 @@
 class Api::V1::ChartsController < ApplicationController
   before_action :authenticate_user!
   def show
+    # TODO: 将来的にユーザーがchartを複数持つようにした時は、paramsでchart IDを指定させる。
     nodes = current_user.charts.first.nodes
     edges = current_user.charts.first.edges
 
