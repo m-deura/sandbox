@@ -1,4 +1,5 @@
 class Action < ApplicationRecord
+  belongs_to :user
   has_many :nodes, dependent: :destroy
 
   enum action_type: { offense: 0, defense: 1 }

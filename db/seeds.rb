@@ -8,16 +8,19 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+admin_user = User.find_by(id: 1) || User.create!(email: "admin@example.com", password: "password")
 
 action_arr = []
 
 bottom = Action.create!(
+  user: admin_user,
   title: "BOTTOM",
   action_type: :offense,
   mastery_level: :Perfect
   )
 
 top = Action.create!(
+  user: admin_user,
   title: "TOP",
   action_type: :offense,
   mastery_level: :Perfect
@@ -26,7 +29,7 @@ top = Action.create!(
 action_arr << bottom << top
 
 1.upto(4) do |n|
-  action = Action.create!(title: "title#{n}", detail: "detail#{n}")
+  action = Action.create!(user: admin_user, title: "title#{n}", detail: "detail#{n}")
   action_arr << action
 end
 
