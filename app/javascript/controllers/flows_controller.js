@@ -30,7 +30,7 @@ cytoscape.use(dagre);
 cytoscape.use(cytoscapePopper(popperFactory));
 
 export default class extends Controller {
-  static targets = ["cy", "drawer", "drawerTitle", "drawerContent"];
+  static targets = ["cy", "drawer", "drawerTitle" ];
 
   connect() {
     const url = "/api/v1/charts/1";
@@ -116,8 +116,10 @@ export default class extends Controller {
           const div = document.createElement("div");
           div.classList.add("node-toolbar");
           div.innerHTML = `
-          <button data-action="click->graph#addNode" data-node-id="${node.id()}">＋</button>
-          <button data-action="click->graph#toggleCollapse" data-node-id="${node.id()}">－</button>
+          <div data-controller="popper-toolbar">
+            <button data-action="click->popper-toolbar#addNode" data-node-id="${node.id()}">＋</button>
+            <button data-action="click->popper-toolbar#toggleCollapse" data-node-id="${node.id()}">－</button>
+          </div>
         `;
           document.body.appendChild(div);
           return div;
@@ -135,21 +137,8 @@ export default class extends Controller {
       this.cy.on("pan zoom resize", update);
     }
 
-  addNode(event) {
-    const parentId = event.target.dataset.nodeId;
-    console.log("Add node under:", parentId);
-    // ここでモーダルを開くなど
-  }
-
-  toggleCollapse(event) {
-    const nodeId = event.target.dataset.nodeId;
-    console.log("Toggle collapse for:", nodeId);
-    // 子ノードを一時非表示にする処理を書く（必要ならここに）
-  }
-
   showDrawer(data) {
     this.drawerTitleTarget.textContent = data.label;
-    // this.drawerContentTarget.textContent = ノードID: ${data.id};
     this.drawerTarget.classList.remove("translate-x-full");
     this.drawerTarget.classList.add("translate-x-0");
   }

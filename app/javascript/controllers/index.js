@@ -9,3 +9,6 @@ application.register("flows", FlowsController)
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import PopperToolbarController from "./popper_toolbar_controller"
+application.register("popper-toolbar", PopperToolbarController)
