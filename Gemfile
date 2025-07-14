@@ -65,4 +65,4 @@ gem "omniauth-google-oauth2"
 
 # エラー「WARN -- omniauth: Attack prevented by OmniAuth::AuthenticityTokenProtection
 # ERROR -- omniauth: (google_oauth2) Authentication failure! authenticity_error: OmniAuth::AuthenticityError, Forbidden」への対応
-gem 'omniauth-rails_csrf_protection'
+gem "omniauth-rails_csrf_protection"
