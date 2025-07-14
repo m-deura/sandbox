@@ -62,3 +62,7 @@ gem "tailwindcss-ruby", "3.4.17"
 gem "devise", "~> 4.9"
 
 gem "omniauth-google-oauth2"
+
+# エラー「WARN -- omniauth: Attack prevented by OmniAuth::AuthenticityTokenProtection
+# ERROR -- omniauth: (google_oauth2) Authentication failure! authenticity_error: OmniAuth::AuthenticityError, Forbidden」への対応
+gem 'omniauth-rails_csrf_protection'
